@@ -24,7 +24,20 @@ class MyCard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('BBANTO'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        centerTitle: true,
+        backgroundColor: Colors.redAccent,
+        foregroundColor: Colors.white,
+        elevation: 0.0,
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Hello'),
+            Text('Hello'),
+            Text('Hello'),
+          ],
+        ),
       ),
     );
   }

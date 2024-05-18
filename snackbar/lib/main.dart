@@ -31,6 +31,23 @@ class MyPage extends StatelessWidget {
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Hello'),
+            ));
+          },
+          style: ButtonStyle(
+            textStyle: MaterialStateProperty.all(const TextStyle(
+              fontSize: 15,
+            )),
+            foregroundColor: MaterialStateProperty.all(Colors.white),
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+          ),
+          child: const Text('Show me'),
+        ),
+      ),
     );
   }
 }

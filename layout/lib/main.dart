@@ -25,12 +25,25 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Layout'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
+      backgroundColor: Colors.blue,
+      body: SafeArea(
+        child: Container(
+          color: Colors.red,
+          width: 100,
+          height: 100,
+          margin: const EdgeInsets.symmetric(
+            vertical: 80.0,
+            horizontal: 20.0,
+          ),
+          padding: const EdgeInsets.all(20.0),
+          child: const Text(
+            'Hello',
+            style: TextStyle(
+              backgroundColor: Colors.green,
+            )
+          ),
+        ),
+      )
     );
   }
 }

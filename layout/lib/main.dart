@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: const MyPage(),
+      // home: const MyPage(),
+      home: const MyColRow(),
     );
   }
 }
@@ -44,6 +45,43 @@ class MyPage extends StatelessWidget {
           ),
         ),
       )
+    );
+  }
+}
+
+class MyColRow extends StatelessWidget {
+  const MyColRow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.teal,
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                color: Colors.white,
+                child: const Text('Container 1'),
+              ),
+              Container(
+                width: 100,
+                height: 100,
+                color: Colors.blue,
+                child: const Text('Container 2'),
+              ),
+              Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+                child: const Text('Container 3'),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -19,12 +19,13 @@ class ScreenA extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/b');
               },
-              style: ButtonStyle(
-                textStyle: MaterialStateProperty.all(const TextStyle(
-                  fontSize: 15,
-                )),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orangeAccent,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                elevation: 0.0,
               ),
               child: const Text('Go to the Screen B'),
             ),

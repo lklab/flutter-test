@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dice.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,9 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  TextEditingController controller = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +74,7 @@ class _LogInState extends State<LogIn> {
                           labelText: 'Enter "dice"',
                         ),
                         keyboardType: TextInputType.emailAddress,
+                        controller: controller,
                       ),
                       TextField(
                         decoration: InputDecoration(
@@ -77,6 +82,7 @@ class _LogInState extends State<LogIn> {
                         ),
                         keyboardType: TextInputType.text,
                         obscureText: true,
+                        controller: controller2,
                       ),
                       SizedBox(
                         height: 40.0,
@@ -89,7 +95,24 @@ class _LogInState extends State<LogIn> {
                             backgroundColor: Colors.orangeAccent,
                           ),
                           onPressed: () {
-                            
+                            bool isDice = controller.text == 'dice';
+                            bool isPw = controller2.text == '1234';
+
+                            if(isDice && isPw) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (BuildContext context) => Dice()),
+                              );
+                            }
+                            else if (!isDice && !isPw) {
+                              showSnackBar(context, '로그인 정보를 다시 확인하세요');
+                            }
+                            else if (!isDice) {
+                              showSnackBar(context, 'dice의 철자를 확인하세요');
+                            }
+                            else {
+                              showSnackBar(context, '비밀번호가 일치하지 않습니다.');
+                            }
                           },
                           child: Icon(
                             Icons.arrow_forward,
@@ -108,4 +131,17 @@ class _LogInState extends State<LogIn> {
       ),
     );
   }
+}
+
+void showSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        message,
+        textAlign: TextAlign.center,
+      ),
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.blue,
+    ),
+  );
 }

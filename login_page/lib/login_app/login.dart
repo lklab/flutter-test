@@ -39,70 +39,31 @@ class LogIn extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          ButtonTheme(
-            height: 50.0,
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Image.asset('images/flogo.png'),
-                  Text(
-                    'Login with Facebook',
-                    style: TextStyle(color: Colors.white, fontSize: 15.0),
-                  ),
-                  Opacity(
-                    opacity: 0.0,
-                    child: Image.asset('images/glogo.png'),
-                  ),
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF334D92),
-              ),
-              onPressed: () {},
+          MyButton(
+            image: Image.asset('images/flogo.png'),
+            text: Text(
+              'Login with Facebook',
+              style: TextStyle(color: Colors.white, fontSize: 15.0),
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(4.0),
-              ),
-            ),
+            color: Color(0xFF334D92),
+            radius: 4.0,
+            onPressed: () {},
           ),
           SizedBox(
             height: 10.0,
           ),
-          ButtonTheme(
-            height: 50.0,
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Icon(
-                    Icons.mail,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    'Login with Email',
-                    style: TextStyle(color: Colors.white, fontSize: 15.0),
-                  ),
-                  Opacity(
-                    opacity: 0.0,
-                    child: Icon(
-                      Icons.mail,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-              ),
-              onPressed: () {},
+          MyButton(
+            image: Icon(
+              Icons.mail,
+              color: Colors.white,
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(4.0),
-              ),
+            text: Text(
+              'Login with Email',
+              style: TextStyle(color: Colors.white, fontSize: 15.0),
             ),
+            color: Colors.green,
+            radius: 4.0,
+            onPressed: () {},
           ),
         ],
       ),

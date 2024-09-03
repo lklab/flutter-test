@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:weather_app/data/my_location.dart';
 import 'package:weather_app/data/network.dart';
+import 'package:weather_app/screens/weather_screen.dart';
 
 const String apiKey = '';
 
@@ -42,27 +43,13 @@ class _LoadingState extends State<Loading> {
     latitude = myLocation.latitude;
     longitude = myLocation.longitude;
 
-    String url = 'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey';
-    print(url);
+    String url = 'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
     Network network = Network(url);
     var weatherData = await network.getJsonData();
-    print(weatherData);
-  }
+    // print(weatherData);
 
-  void fetchData() async {
-    // Uri uri = Uri.parse('https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1');
-    // http.Response response = await http.get(uri);
-
-    // if(response.statusCode == 200) {
-    //   String jsonData = response.body;
-    //   var myJson = jsonDecode(jsonData);
-    //   var description = myJson['weather'][0]['description'];
-    //   var wind = myJson['wind']['speed'];
-    //   var id = myJson['id'];
-    //   print('description: $description\nwind: $wind\nid: $id');
-    // }
-    // else {
-    //   print(response.statusCode);
-    // }
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return WeatherScreen(parseWeatherData: weatherData);
+    }));
   }
 }

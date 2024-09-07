@@ -43,13 +43,21 @@ class _LoadingState extends State<Loading> {
     latitude = myLocation.latitude;
     longitude = myLocation.longitude;
 
-    String url = 'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
-    Network network = Network(url);
-    var weatherData = await network.getJsonData();
+    String weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric';
+    Network weatherNetwork = Network(weatherUrl);
+    var weatherData = await weatherNetwork.getJsonData();
     // print(weatherData);
 
+    String airUrl = 'https://api.openweathermap.org/data/2.5/air_pollution?lat=$latitude&lon=$longitude&appid=$apiKey';
+    Network airNetwork = Network(airUrl);
+    var airData = await airNetwork.getJsonData();
+    print(airData);
+
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return WeatherScreen(parseWeatherData: weatherData);
+      return WeatherScreen(
+        parseWeatherData: weatherData,
+        parseAirData: airData,
+      );
     }));
   }
 }

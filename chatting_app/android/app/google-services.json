@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "400891870905",
+    "project_id": "flutter-chat-test-8e176",
+    "storage_bucket": "flutter-chat-test-8e176.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400891870905:android:87b7f193a9cc1429436568",
+        "android_client_info": {
+          "package_name": "com.khleetest.chatting_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8T2QPKTdl2ma5Kfm2KfztnpaSrM5gY7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

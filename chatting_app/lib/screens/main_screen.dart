@@ -1,5 +1,8 @@
-import 'package:chatting_app/config/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:chatting_app/config/palette.dart';
+import 'package:chatting_app/screens/chat_screen.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({super.key});
@@ -14,6 +17,8 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   String userName = '';
   String userEmail = '';
   String userPassword = '';
+
+  final _auth = FirebaseAuth.instance;
 
   void _tryValidation() {
     final bool isValid = _formKey.currentState!.validate();
@@ -189,6 +194,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                                 onSaved: (value) {
                                   userName = value!;
                                 },
+                                onChanged: (value) {
+                                  userName = value;
+                                },
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.account_circle,
@@ -228,6 +236,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                                 onSaved: (value) {
                                   userEmail = value!;
                                 },
+                                onChanged: (value) {
+                                  userEmail = value;
+                                },
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.email,
@@ -267,6 +279,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                                 onSaved: (value) {
                                   userPassword = value!;
                                 },
+                                onChanged: (value) {
+                                  userPassword = value;
+                                },
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.lock,
@@ -314,6 +330,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                                 onSaved: (value) {
                                   userEmail = value!;
                                 },
+                                onChanged: (value) {
+                                  userEmail = value;
+                                },
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.email,
@@ -353,6 +373,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                                 onSaved: (value) {
                                   userPassword = value!;
                                 },
+                                onChanged: (value) {
+                                  userPassword = value;
+                                },
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.lock,
@@ -403,8 +427,67 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   child: GestureDetector(
-                    onTap: () {
-                      _tryValidation();
+                    onTap: () async {
+                      if (isSignupScreen) {
+                        _tryValidation();
+
+                        try {
+                          final UserCredential newUser = await _auth.createUserWithEmailAndPassword(
+                            email: userEmail,
+                            password: userPassword,
+                          );
+
+                          if (newUser.user != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ChatScreen();
+                                },
+                              ),
+                            );
+                          }
+                        }
+                        catch (e) {
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please check your email and password'),
+                              backgroundColor: Colors.blue,
+                            ),
+                          );
+                        }
+                      }
+                      else {
+                        _tryValidation();
+
+                        try {
+                          final UserCredential signInUser = await _auth.signInWithEmailAndPassword(
+                            email: userEmail,
+                            password: userPassword,
+                          );
+
+                          if (signInUser.user != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ChatScreen();
+                                },
+                              ),
+                            );
+                          }
+                        }
+                        catch (e) {
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please check your email and password'),
+                              backgroundColor: Colors.blue,
+                            ),
+                          );
+                        }
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(

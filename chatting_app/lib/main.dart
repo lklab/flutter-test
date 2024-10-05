@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:chatting_app/screens/main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'package:chatting_app/screens/main_screen.dart';
 import 'firebase_options.dart';
+
+// import 'package:chatting_app/stream_builder_ex/counter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -19,7 +19,7 @@ class _CounterState extends State<Counter> {
       body: StreamBuilder<int>(
         initialData: price,
         stream: addStreamValue(),
-        builder: (context, snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
           final priceNumber = snapshot.data.toString();
           return Center(
             child: Text(

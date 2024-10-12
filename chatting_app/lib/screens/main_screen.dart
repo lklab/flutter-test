@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'package:chatting_app/config/palette.dart';
-import 'package:chatting_app/screens/chat_screen.dart';
+// import 'package:chatting_app/screens/chat_screen.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({super.key});
@@ -445,16 +446,24 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               email: userEmail,
                               password: userPassword,
                             );
-        
+
                             if (newUser.user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return ChatScreen();
-                                  },
-                                ),
-                              );
+                              await FirebaseFirestore.instance
+                                .collection('user')
+                                .doc(newUser.user!.uid)
+                                .set({
+                                  'userName': userName,
+                                  'email': userEmail,
+                                });
+
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) {
+                              //       return ChatScreen();
+                              //     },
+                              //   ),
+                              // );
                             }
                           }
                           catch (e) {
@@ -471,21 +480,21 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                           _tryValidation();
         
                           try {
-                            final UserCredential signInUser = await _auth.signInWithEmailAndPassword(
+                            final UserCredential _ = await _auth.signInWithEmailAndPassword(
                               email: userEmail,
                               password: userPassword,
                             );
-        
-                            if (signInUser.user != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return ChatScreen();
-                                  },
-                                ),
-                              );
-                            }
+
+                            // if (signInUser.user != null) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) {
+                            //         return ChatScreen();
+                            //       },
+                            //     ),
+                            //   );
+                            // }
                           }
                           catch (e) {
                             print(e);
@@ -498,9 +507,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                           }
                         }
 
-                        setState(() {
-                          showSpinner = false;
-                        });
+                        // setState(() {
+                        //   showSpinner = false;
+                        // });
                       },
                       child: Container(
                         decoration: BoxDecoration(

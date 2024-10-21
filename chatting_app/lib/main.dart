@@ -1,3 +1,4 @@
+import 'package:chatting_app/data/user_data.dart';
 import 'package:chatting_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final UserData _userData = UserData();
     return MaterialApp(
       title: 'Chatting app',
       theme: ThemeData(
@@ -29,13 +31,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+        stream: _userData.getStream(),
+        builder: (BuildContext context, AsyncSnapshot<UserCredential?> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            return ChatScreen();
+            return ChatScreen(_userData);
           }
           else {
-            return LoginSignupScreen();
+            return LoginSignupScreen(_userData);
           }
         },
       ),

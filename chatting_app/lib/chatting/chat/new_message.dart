@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,6 +18,7 @@ class _NewMessageState extends State<NewMessage> {
     FirebaseFirestore.instance.collection('chat').add({
       'text' : _userEnterMessage,
       'time' : Timestamp.now(),
+      'userId' : FirebaseAuth.instance.currentUser!.uid,
     });
     _controller.clear();
   }
@@ -39,6 +41,7 @@ class _NewMessageState extends State<NewMessage> {
                 });
               },
               controller: _controller,
+              maxLines: null,
             ),
           ),
           IconButton(
